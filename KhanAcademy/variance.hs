@@ -17,8 +17,14 @@ lenVariance xs = map (square . distance) xs
 round10 x = (round' (x * 10)) / 10
     where round' = fromIntegral . round
 
+standardDeviation  = sqrt . variance
+standardDeviation' = sqrt . variance'
+
 m  = round10 . mean
 v  = round10 . variance
 v' = round10 . variance'
+s  = round10 . standardDeviation
+s' = round10 . standardDeviation'
 
-
+ms xs  = map (\f -> f xs) [m, s]
+ms' xs = map (\f -> f xs) [m, s']
