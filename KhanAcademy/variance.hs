@@ -5,7 +5,7 @@ length' = fromIntegral . length
 mean xs = sum xs / length' xs
 
 -- Sample Variance
-variance  xs = mean $ lenVariance xs
+variance = mean . lenVariance
 
 -- Unbiased Variance
 variance' xs = sum (lenVariance xs) / (length' xs - 1)
