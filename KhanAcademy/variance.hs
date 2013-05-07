@@ -1,7 +1,8 @@
+import Control.Applicative ((<*>))
 
 length' = fromIntegral . length
 
-mean   xs = sum xs / length' xs
+mean xs = sum xs / length' xs
 
 -- Sample Variance
 variance  xs = mean $ lenVariance xs
@@ -10,8 +11,8 @@ variance  xs = mean $ lenVariance xs
 variance' xs = sum (lenVariance xs) / (length' xs - 1)
 
 lenVariance xs = map (square . distance) xs
-    where m        = mean xs
-          distance = ((-)m)
+    where mu       = mean xs
+          distance = ((-)mu)
           square   = (**2)
 
 round10 x = (round' (x * 10)) / 10
@@ -26,5 +27,5 @@ v' = round10 . variance'
 s  = round10 . standardDeviation
 s' = round10 . standardDeviation'
 
-ms xs  = map (\f -> f xs) [m, s]
-ms' xs = map (\f -> f xs) [m, s']
+ms  xs = [m, s ] <*> [xs]
+ms' xs = [m, s'] <*> [xs]
